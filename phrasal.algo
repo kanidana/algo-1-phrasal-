@@ -1,0 +1,29 @@
+ALGORITHM phrasal
+VAR
+    longueur = 0 //Compte le nombre total de caractères dans la phrase.
+    nombre_mots = 0  //Compte le nombre de mots dans la phrase.
+    nombre_voyelles = 0   //Compte le nombre de voyelles dans la phrase.
+    voyelles = "aeiouAEIOU"  //Contient toutes les voyelles (majuscules et minuscules).
+    phrase = STRING  // La chaîne de caractères à analyser.
+    dans_un_mot = False //Indique si l’on est actuellement dans un mot (initialisé à False).
+BEGIN
+// FOR Parcourt chaque caractère de la phrase. Incrémente longueur pour chaque caractère rencontré.
+    FOR caractere IN phrase DO
+        longueur += 1
+// Si le caractère actuel est une voyelle (présente dans voyelles), incrémente nombre_voyelles.
+        IF caractere IN voyelles THEN
+            nombre_voyelles += 1
+        END_IF
+//Si le caractère actuel est un espace (' '), cela signifie que l’on sort d’un mot, donc dans_un_mot est mis à False.
+        IF caractere == ' ' THEN
+            dans_un_mot = False
+        ELSEIF caractere != ' ' AND NOT dans_un_mot THEN
+            nombre_mots += 1
+            dans_un_mot = True
+        END_IF
+    END_FOR
+    
+    print(longueur)
+    print(nombre_mots)
+    print(nombre_voyelles)
+END
